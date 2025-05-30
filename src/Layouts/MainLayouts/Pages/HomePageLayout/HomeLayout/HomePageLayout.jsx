@@ -1,5 +1,5 @@
 // File path__
-import Banner from "./Banner/Banner";
+import Banner from "../Banner/Banner";
 
 const HomePageLayout = () => {
   return (

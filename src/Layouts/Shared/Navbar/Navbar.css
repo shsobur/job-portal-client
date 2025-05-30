@@ -107,15 +107,8 @@ nav {
   pointer-events: none;
   transition: all 0.2s ease;
   z-index: 100;
-  min-width: 140px;
+  min-width: 200px;
   padding: 10px;
-}
-
-.dropdown_menu span {
-  gap: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
 
 .dropdown_menu.open {
@@ -124,14 +117,14 @@ nav {
   pointer-events: auto;
 }
 
-#dropdown_item_parent_container a {
-  text-decoration: none;
-}
-
 .dropdown_item {
-  display: inline-block;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   padding: 10px 16px;
   color: #333;
+  font-size: 18px;
   font-weight: 500;
   transition: background 0.2s;
   border-radius: 6px;

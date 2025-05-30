@@ -1,6 +1,7 @@
 // File ptah__
 import "./index.css";
 import router from "./Routes/Routes";
+import AuthProvider from "./Provider/AuthProvider";
 
 // From react__
 import { StrictMode } from "react";
@@ -13,7 +14,9 @@ import { HelmetProvider } from "react-helmet-async";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </HelmetProvider>
   </StrictMode>
 );

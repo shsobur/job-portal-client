@@ -125,12 +125,12 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to="/about-us"
+                to="/application"
                 className={({ isActive }) =>
                   isActive ? "route_active_style" : "router_none_active_style"
                 }
               >
-                <li>About Us</li>
+                <li>Application</li>
               </NavLink>
 
               <NavLink
@@ -155,17 +155,17 @@ const Navbar = () => {
                 id="dropdown_item_parent_container"
                 className={`dropdown_menu ${open ? "open" : ""}`}
               >
-                <NavLink to="/dashboard">
+                <NavLink to="/profile">
                   <span
                     onClick={() => setOpen(!open)}
                     className="dropdown_item"
                   >
                     <MdOutlineSpaceDashboard />
-                    Dashboard
+                    Profile
                   </span>
                 </NavLink>
 
-                <Link to="/signIn">
+                <Link to="/sign-up">
                   <span
                     onClick={() => setOpen(!open)}
                     className="dropdown_item"
