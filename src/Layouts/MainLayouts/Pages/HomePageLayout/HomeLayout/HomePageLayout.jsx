@@ -6,11 +6,13 @@ import UserDataLoading from "../../../../Components/UserDataLoading/UserDataLoad
 
 // From react__
 import { use, useEffect, useState } from "react";
+import useUserData from "../../../../../Hooks/useUserData";
 
 const HomePageLayout = () => {
   const { user } = use(AuthContext);
   const axiosPublic = useAxiosPublic();
-  const [userDataLoading, setUserDataLoading] = useState(true);
+  const {userDataLoading} = useUserData()
+  const [userDataStorLoading, setUserDataStorLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -25,13 +27,13 @@ const HomePageLayout = () => {
       // Stor user data on DB__
       const handleUserData = async () => {
         try {
-          setUserDataLoading(true);
+          setUserDataStorLoading(true);
           const res = await axiosPublic.post("/user-role-data", userRoleData);
           console.log(res.data);
         } catch (error) {
           console.error("Error saving user data:", error);
         } finally {
-          setUserDataLoading(false);
+          setUserDataStorLoading(false);
         }
       };
 
@@ -41,7 +43,7 @@ const HomePageLayout = () => {
 
   return (
     <>
-      {userDataLoading ? (
+      {userDataStorLoading || userDataLoading ? (
         <section>
           <UserDataLoading></UserDataLoading>
         </section>
