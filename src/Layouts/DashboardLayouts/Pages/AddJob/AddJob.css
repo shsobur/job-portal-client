@@ -1,0 +1,98 @@
+#job_add_section {
+  background-color: #f6f2ed;
+}
+
+.form_wrapper {
+  height: auto;
+  max-width: 1280px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.form_title {
+  font-size: 2.2rem;
+  color: #309689;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  border-bottom: 2px solid #309689;
+}
+
+.job_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_group label {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.form_group input,
+.form_group select,
+.form_group textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form_group input:focus,
+.form_group select:focus,
+.form_group textarea:focus {
+  outline: none;
+  border-color: #309689;
+}
+
+.form_row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form_row .form_group {
+  flex: 1;
+}
+
+.tag_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag_item {
+  background-color: #309689;
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.submit_button {
+  background-color: #309689;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit_button:hover {
+  background-color: #25776e;
+}
+
+@media (max-width: 600px) {
+  .form_row {
+    flex-direction: column;
+  }
+}

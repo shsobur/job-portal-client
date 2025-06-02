@@ -7,6 +7,8 @@ import HomePageLayout from "../Layouts/MainLayouts/Pages/HomePageLayout/HomeLayo
 
 // Imported package__
 import { createBrowserRouter } from "react-router";
+import Dashboard from "../Layouts/DashboardLayouts/Dashboard/Dashboard";
+import AddJob from "../Layouts/DashboardLayouts/Pages/AddJob/AddJob";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,17 @@ const router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    errorElement: <ErrorPage></ErrorPage>,
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/add-job",
+        element: <AddJob></AddJob>,
       },
     ],
   },
