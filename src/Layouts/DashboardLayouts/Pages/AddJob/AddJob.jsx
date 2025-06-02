@@ -1,10 +1,16 @@
-import { useState } from "react";
+// File path__
 import "./AddJob.css";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+
+// NPM Package__
 import Swal from "sweetalert2";
+
+// From react__
+import { useState } from "react";
 
 const AddJob = () => {
   const axiosSecure = useAxiosSecure();
+  const [jobPostLoading, setJobPostLoading] = useState(false);
   const [skills, setSkills] = useState([]);
   const [tags, setTags] = useState([]);
   const [skillInput, setSkillInput] = useState("");
@@ -44,6 +50,7 @@ const AddJob = () => {
       company: form.company.value,
       location: form.location.value,
       employmentType: form.employmentType.value,
+      jobType: form.jobType.value,
       salary: {
         min: parseFloat(form.min.value),
         max: parseFloat(form.max.value),
@@ -66,6 +73,7 @@ const AddJob = () => {
     };
 
     try {
+      setJobPostLoading(true);
       const res = await axiosSecure.post("/add-job-circular", jobData);
       if (res.data?.insertedId) {
         Swal.fire("Success!", "Job posted successfully", "success");
@@ -76,6 +84,7 @@ const AddJob = () => {
         form.logo.value = "";
         form.title.value = "";
         form.company.value = "";
+        form.jobType.value = "";
         form.website.value = "";
         form.location.value = "";
         form.currency.value = "";
@@ -97,6 +106,8 @@ const AddJob = () => {
     } catch (err) {
       console.error(err);
       Swal.fire("Error!", "Failed to post job", "error");
+    } finally {
+      setJobPostLoading(false);
     }
   };
 
@@ -137,15 +148,27 @@ const AddJob = () => {
               />
             </div>
 
-            <div className="form_group">
-              <label>Employment Type</label>
-              <select name="employmentType" required>
-                <option value="">Select type</option>
-                <option>Full-time</option>
-                <option>Part-time</option>
-                <option>Internship</option>
-                <option>Remote</option>
-              </select>
+            <div className="form_row">
+              <div className="form_group">
+                <label>Employment Type</label>
+                <select name="employmentType" required>
+                  <option value="">Select type</option>
+                  <option>Full-time</option>
+                  <option>Part-time</option>
+                  <option>Internship</option>
+                  <option>Remote</option>
+                </select>
+              </div>
+
+              <div className="form_group">
+                <label>Job Type</label>
+                <select name="jobType" required>
+                  <option value="">Select type</option>
+                  <option>OnSite</option>
+                  <option>Remote</option>
+                  <option>Hybrid</option>
+                </select>
+              </div>
             </div>
 
             <div className="form_row">
@@ -192,6 +215,27 @@ const AddJob = () => {
 
             <div className="form_row">
               <div className="form_group">
+                <label>Experience Level</label>
+                <select name="experienceLevel" required>
+                  <option>Junior</option>
+                  <option>Mid</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+
+              <div className="form_group">
+                <label>Category</label>
+                <select name="category" required>
+                  <option>Web Development</option>
+                  <option>Design</option>
+                  <option>Marketing</option>
+                  <option>Technology</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form_row">
+              <div className="form_group">
                 <label>Apply Start Date</label>
                 <input name="postedDate" type="date" required />
               </div>
@@ -200,15 +244,6 @@ const AddJob = () => {
                 <label>Apply End Date</label>
                 <input name="deadline" type="date" required />
               </div>
-            </div>
-
-            <div className="form_group">
-              <label>Experience Level</label>
-              <select name="experienceLevel" required>
-                <option>Junior</option>
-                <option>Mid</option>
-                <option>Senior</option>
-              </select>
             </div>
 
             <div className="form_group">
@@ -285,16 +320,6 @@ const AddJob = () => {
             </div>
 
             <div className="form_group">
-              <label>Category</label>
-              <select name="category" required>
-                <option>Web Development</option>
-                <option>Design</option>
-                <option>Marketing</option>
-                <option>Technology</option>
-              </select>
-            </div>
-
-            <div className="form_group">
               <label>Tags</label>
               <input
                 type="text"
@@ -318,7 +343,7 @@ const AddJob = () => {
             </div>
 
             <button type="submit" className="submit_button">
-              Post Job
+              {jobPostLoading ? "Working..." : "Post Job"}
             </button>
           </form>
         </div>
