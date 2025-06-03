@@ -63,7 +63,7 @@ const AddJob = () => {
       jobDescription: form.jobDescription.value,
       requirements: form.requirements.value,
       responsibilities: form.responsibilities.value,
-      skills: skillInput,
+      skills: skills,
       companyInfo: {
         logo: form.logo.value,
         website: form.website.value,
