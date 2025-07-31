@@ -52,6 +52,7 @@ const SignUp = () => {
           });
 
         navigate("/");
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +70,7 @@ const SignUp = () => {
                   Sign Up Now
                   <Link to="/">
                     <p className="home_button">
-                      <TiHomeOutline />
+                      <TiHomeOutline color="#309689" />
                     </p>
                   </Link>
                 </h1>

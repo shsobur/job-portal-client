@@ -1,35 +1,49 @@
 // File path__
 import Banner from "../Banner/Banner";
+import useUserData from "../../../../../Hooks/useUserData";
 import useAxiosPublic from "../../../../../Hooks/useAxiosPublic";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
 import UserDataLoading from "../../../../Components/UserDataLoading/UserDataLoading";
 
 // From react__
-import { use, useEffect, useState } from "react";
-import useUserData from "../../../../../Hooks/useUserData";
+import { useContext, useEffect, useState } from "react";
 
 const HomePageLayout = () => {
-  const { user } = use(AuthContext);
   const axiosPublic = useAxiosPublic();
-  const {userDataLoading} = useUserData()
+  const { user } = useContext(AuthContext);
+  const { userDataLoading } = useUserData();
   const [userDataStorLoading, setUserDataStorLoading] = useState(false);
 
   useEffect(() => {
     if (user) {
-      const userRoleData = {
-        name: user.displayName,
-        userEmail: user.email,
-        isVerify: user.emailVerified,
-        userPhoto: user.photoURL,
-        userRole: "applicant",
+      const userData = {
+        name: user?.displayName || "User456",
+        email: user.email,
+        role: "user",
+        photo: "",
+        phone: "",
+        address: "",
+        resumeLink: "",
+        experience: 0,
+        education: "",
+        skills: {
+          professionalIn: [],
+          familiarWith: [],
+        },
+        appliedJobs: [],
+        savedJobs: [],
+        createdAt: new Date().toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }),
       };
 
       // Stor user data on DB__
       const handleUserData = async () => {
         try {
           setUserDataStorLoading(true);
-          const res = await axiosPublic.post("/user-role-data", userRoleData);
-          console.log(res.data);
+          await axiosPublic.post("/user-role-data", userData);
         } catch (error) {
           console.error("Error saving user data:", error);
         } finally {
@@ -43,15 +57,13 @@ const HomePageLayout = () => {
 
   return (
     <>
-      {userDataStorLoading || userDataLoading ? (
-        <section>
-          <UserDataLoading></UserDataLoading>
-        </section>
-      ) : (
-        <section>
-          <Banner></Banner>
-        </section>
-      )}
+      <section>
+        {userDataStorLoading || userDataLoading ? (
+          <UserDataLoading />
+        ) : (
+          <Banner />
+        )}
+      </section>
     </>
   );
 };

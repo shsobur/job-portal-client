@@ -9,6 +9,7 @@ import HomePageLayout from "../Layouts/MainLayouts/Pages/HomePageLayout/HomeLayo
 import { createBrowserRouter } from "react-router";
 import Dashboard from "../Layouts/DashboardLayouts/Dashboard/Dashboard";
 import AddJob from "../Layouts/DashboardLayouts/Pages/AddJob/AddJob";
+import FindJobsLayout from "../Layouts/MainLayouts/Pages/FindJobs/FindJobsLayout/FindJobsLayout";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePageLayout></HomePageLayout>,
+      },
+      {
+        path: "/find-jobs",
+        element: <FindJobsLayout></FindJobsLayout>,
       },
       {
         path: "/sign-in",

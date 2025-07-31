@@ -1,5 +1,7 @@
 // File path__
 import "./Navbar.css";
+import useUserData from "../../../Hooks/useUserData";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 // Imported package__
 import Swal from "sweetalert2";
@@ -17,13 +19,11 @@ import { RiContactsBook2Line } from "react-icons/ri";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 
 // From react__
-import { use, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
-import useUserData from "../../../Hooks/useUserData";
+import { useContext, useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const menuRef = useRef();
-  const { user, logOut } = use(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -118,7 +118,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to="/jobs"
+                to="/find-jobs"
                 className={({ isActive }) =>
                   isActive ? "route_active_style" : "router_none_active_style"
                 }
