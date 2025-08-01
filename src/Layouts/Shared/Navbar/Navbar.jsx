@@ -24,10 +24,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 const Navbar = () => {
   const menuRef = useRef();
   const { user, logOut } = useContext(AuthContext);
+  const { currentUserData } = useUserData();
   const [open, setOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { currentUserData } = useUserData();
   const userRole = currentUserData?.userRole;
 
   // Handle Close Dropdown__
@@ -145,29 +145,19 @@ const Navbar = () => {
               </NavLink>
             </ul>
 
-            <div className="dropdown_wrapper" ref={menuRef}>
-              <button
-                className="dropdown_button"
-                onClick={() => setOpen(!open)}
-              >
-                <HiMiniUserCircle />
-              </button>
+            {user ? (
+              <div className="dropdown_wrapper" ref={menuRef}>
+                <button
+                  className="dropdown_button"
+                  onClick={() => setOpen(!open)}
+                >
+                  <HiMiniUserCircle />
+                </button>
 
-              <div
-                id="dropdown_item_parent_container"
-                className={`dropdown_menu ${open ? "open" : ""}`}
-              >
-                {userRole === "admin" ? (
-                  <NavLink to="/dashboard">
-                    <span
-                      onClick={() => setOpen(!open)}
-                      className="dropdown_item"
-                    >
-                      <MdOutlineSpaceDashboard />
-                      Dashboard
-                    </span>
-                  </NavLink>
-                ) : (
+                <div
+                  id="dropdown_item_parent_container"
+                  className={`dropdown_menu ${open ? "open" : ""}`}
+                >
                   <NavLink to="/profile">
                     <span
                       onClick={() => setOpen(!open)}
@@ -177,24 +167,31 @@ const Navbar = () => {
                       Profile
                     </span>
                   </NavLink>
-                )}
 
-                {user ? (
-                  <span onClick={handleSignOut} className="dropdown_item">
-                    <PiSignIn /> Sign Out
-                  </span>
-                ) : (
-                  <Link to="/sign-up">
+                  <NavLink to="/dashboard">
                     <span
                       onClick={() => setOpen(!open)}
                       className="dropdown_item"
                     >
-                      <PiSignIn /> Sign In
+                      <MdOutlineSpaceDashboard />
+                      Dashboard
                     </span>
-                  </Link>
-                )}
+                  </NavLink>
+
+                  {user && (
+                    <span onClick={handleSignOut} className="dropdown_item">
+                      <PiSignIn /> Sign Out
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
+            ) : (
+              <Link to="/sign-in">
+                <h2 className="btn bg-[#309689] text-white text-lg cursor-pointer">
+                  Sign In
+                </h2>
+              </Link>
+            )}
 
             <div className="mobile_menu_container">
               <span onClick={() => setMenuOpen(!menuOpen)}>
